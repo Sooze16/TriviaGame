@@ -1,0 +1,45 @@
+                @font-face {
+                    font-family: peanuts;
+                    src: url(./PEANUTS_.TTF);
+                }
+                
+                @font-face {
+                    font-family: snoopy;
+                    src: url(./snoopy_reg-webfont.otf)
+                }
+                
+                .wrapper {
+                    font-family: peanuts;
+                    border: 10px solid black;
+                }
+                
+                #bckimg {
+                    background-image: url(/TriviaGame/assets/images/desk.jpg);
+                    background-size: cover;
+                }
+                
+                h1 {
+                    text-align: center;
+                }
+                
+                footer {
+                    font-family: snoopy;
+                    padding-bottom: 0;
+                }
+                
+                .logo {
+                    /* float: center; */
+                    margin-top: 5px;
+                    margin-bottom: 25px;
+                    height: 70px;
+                    width: 175px;
+                    border: 2px solid black;
+                }
+                
+                #start-button {
+                    margin: 10px 40%;
+                }
+                
+                #gameboard {
+                    border: 5px solid black;
+                }

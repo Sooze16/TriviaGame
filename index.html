@@ -10,39 +10,49 @@
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="/TriviaGame/assets/css/PEANUTS_.TTF">
     <link rel="stylesheet" href="assets/images/">
 
 
 
 </head>
 
-<div container>
-    <h1>The Peanuts Trivia Quiz</h1>
-
-    <div class "row">
-        <div class "col-sm-12">
-
-        </div>
-    </div>
-
-    <button class='btn btn-info' id='start'>Start</button>
-
-    <div id="gameboard">
-
-
-
-
-    </div>
-
-</div>
-
 <body>
 
+    <div class="wrapper" id="bckimg">
+
+
+        <h1>The Peanuts Trivia Quiz</h1>
+        <div>
+            <button type="button" id="start-button" class="btn btn-light btn-lg text-center">Start</button>
+        </div>
+
+
+        <div class="gameboard col-sm-12">
+            <div id="clock"></div>
+            <div id="questionBoard"></div>
+            <div id="answerBoard"></div>
 
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="assets/javascript/app.js"></script>
+
+
+
+
+
+        </div>
+
+        <div class="footer text-center">
+            <p id="cw">Copyright @ 2019</p>
+            <img class="logo" src="assets/images/peanuts logo.jpeg" alt="Peanuts Logo">
+
+        </div>
+
+
 </body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="assets/javascript/app.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </html>

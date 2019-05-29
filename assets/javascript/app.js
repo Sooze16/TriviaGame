@@ -2,15 +2,8 @@ $(document).ready(function() {
 
     //Begin by creating my variables and setting up my questions and answers.
 
-    var correct = 0
 
-    var wrong = 0
-
-    var unAnswered = 0
-
-    var index = 0;
-
-    var questions = [{
+    var triviaQuestions = [{
 
             prompt: "Who is the creator of the Peanuts comic strip?",
             answerArray: ["A. Walt Disney", "B. Charles M. Schulz", "C. Jim Davis", "D. Cathy Guisewite"],
@@ -98,121 +91,101 @@ $(document).ready(function() {
             rightAnswer: "B. 5 Cents",
             images: "https://media.giphy.com/media/BjD7keq3qEFZm/giphy.gif"
 
-        }
-    ]
 
-    $("#start").on("click", function() {
-        console.log("start clicked")
-        game()
+        },
+
+    ];
+
+
+    var correctAnswer = 0
+
+    var wrongAnswer = 0
+
+    var unAnswered = 0
+
+    var userGuess = ""
+
+    var intervalId;
+
+    var timer;
+
+    var index = 0
+
+    //develop my on-click event and trigger the timer load first question and have the start button hide.
+
+
+
+    $("#start-button").on("click",
+        function() {
+            $("#start-button").hide()
+                // runTimer()
+                // game start - load questions and set up gameboard with the questions and answers.
+                // function game() 
+
+            $("#questionBoard").html(triviaQuestions[index].prompt)
+            for (var i = 0; i < triviaQuestions[index].answerArray.length; i++) {
+                $("#answerBoard").append(
+                    "<span guess_value='" + triviaQuestions[index].answerArray[i] + "'>" + triviaQuestions[index].answerArray[i] + "</span>" +
+                    "<br>"
+                )
+            }
+        })
+
+
+
+
+    $("span").on("click", function() {
+        userGuess = $(this).attr("guess_value");
+
+
+        if (userGuess === rightAnswer) {
+            stop();
+            correctAnswer++;
+            // userGuess = "";
+            $("answerBoard").append("Correct!" + [triviaQuestions[index].image]);
+            hidepicture();
+
+        } else {
+            stop();
+            wrongAnswer++;
+            // userGuess = "";
+            $("#answerBoard").append("Wrong!" + [triviaQuestions[index].image]);
+            hidepicture();
+
+
+        }
+
     })
 
-
-    function game() {
-
-        $("#gameboard").empty()
-
-        $("#gameboard").append('<p id="q">' + questions[index].prompt + '</p>')
-        for (i = 0; i < questions[index].answerArray.length; i++) {
-            $("#gameboard").append('<p  class = "ans" value=' + i + '>' + questions[index].answerArray[i] + '</p>')
-
-
+    // /timer start
+    function runTimer() {
+        if (!running) {
+            intervalId = setInterval(decrement, 1000);
+            running = true;
         }
+    }
+    //timer countdown
+    function decrement() {
+        $("#clock").html("<h3>Time remaining: " + timer + "</h3>");
+        timer--;
 
-        $(".ans").on("click", function() {
-
-                console.log(this)
-                var res = parseInt($(".ans").attr("value"))
-                console.log(res)
-
-                // compare questions[index].answerArray[res] with the questions[index].rightAswers
-                // if ===== then corret
-                // if not then incorrect 
-                // show thepic adn set timeout to give time to see the 
-                //index++  if the index is > length of the questions array you need to stop
-                //else  game()
-
-
-            })
-            /* I need to set up the game with a loop-that will go thru all of the questions.
-        I need an on-click event that will load the first question and set a timer that will count down the time alloted for the player to choose the answer.
-        If correct - I need a log to show the wins
-        If wrong - I need a log to show the losses (if else statement)
-        If unanswerred - i need the correct answer to appear and log as a loss. Time Out
-        I need to clear the timer and reset when moving onto the next questions
-        I need the counter to show when time is up and log a loss.a
-        I need the results function at end of game to show wins and losses.answerArray
-
-*/
-
-
+        //stop timer if reach 0
+        if (timer === 0) {
+            unAnswered++;
+            stop();
+            $("#answerBoard").append("Time is up! The correct answer is: " + [rightAnswer.length]);
+            hidepicture();
+        }
     }
 
+    //timer stop
+    function stop() {
+        running = false;
+        clearInterval(intervalId);
 
-    ///
-    // start button // onclick on this button / start the game
-    // show the first question / show the responses then wait(timeout)
-    // the user click before the timout is out === > then (kkep the info, show th result of that question and then go to next)
-    // if the timeout then do the same
-
-    // the next before we need to clean ( html/ timer/etc)
+    };
 
 
 
 
-    ///
-    // // TODO: Put links to our images in this image array.
-    // var images = ["images/bootstrap.png", "images/github-logo.jpg", "images/logo_JavaScript.png"];
-
-    // Variable showImage will hold the setInterval when we start the slideshow
-    // var showImage;
-
-    // Count will keep track of the index of the currently displaying picture.
-    // var count = 0;
-
-    // TODO: Use jQuery to run "startSlideshow" when we click the "start" button.
-    // $("#start").click(startSlideshow);
-
-    // TODO: Use jQuery to run "stopSlideshow" when we click the "stop" button.
-    // $("#stop").click(stopSlideshow);
-
-
-    // // This function will replace display whatever image it's given
-    // // in the 'src' attribute of the img tag.
-    // function displayImage() {
-    //     $("#image-holder").html("<img src=" + images[count] + " width='400px'>");
-    // }
-
-    // function nextImage() {
-    //     //  TODO: Increment the count by 1.
-    //     count++;
-
-    //     // TODO: Show the loading gif in the "image-holder" div.
-    //     $("#image-holder").html("<img src='images/loading.gif' width='200px'/>");
-
-    //     // TODO: Use a setTimeout to run displayImage after 1 second.
-    //     setTimeout(displayImage, 1000);
-
-    //     // TODO: If the count is the same as the length of the image array, reset the count to 0.
-    //     if (count === images.length) {
-    //         count = 0;
-    //     }
-    // }
-
-    // function startSlideshow() {
-
-    //     // TODO: Use showImage to hold the setInterval to run nextImage.
-    //     showImage = setInterval(nextImage, 3000);
-
-    // }
-
-    // function stopSlideshow() {
-
-    //     // TODO: Put our clearInterval here:
-    //     clearInterval(showImage);
-
-    // }
-
-    // // This will run the display image function as soon as the page loads.
-    // displayImage();
-
-})
+});
