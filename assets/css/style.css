@@ -8,38 +8,10 @@
                     src: url(./snoopy_reg-webfont.otf)
                 }
                 
-                .wrapper {
+                body {
                     font-family: peanuts;
-                    border: 10px solid black;
-                }
-                
-                #bckimg {
-                    background-image: url(/TriviaGame/assets/images/desk.jpg);
+                    /* background-image: url(/Unit-4-Game/assets/images/wet_snow.png); */
+                    background-image: url(../images/desk.jpg);
                     background-size: cover;
-                }
-                
-                h1 {
-                    text-align: center;
-                }
-                
-                footer {
-                    font-family: snoopy;
-                    padding-bottom: 0;
-                }
-                
-                .logo {
-                    /* float: center; */
-                    margin-top: 5px;
-                    margin-bottom: 25px;
-                    height: 70px;
-                    width: 175px;
-                    border: 2px solid black;
-                }
-                
-                #start-button {
-                    margin: 10px 40%;
-                }
-                
-                #gameboard {
                     border: 5px solid black;
                 }

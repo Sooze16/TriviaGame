@@ -3,12 +3,12 @@ $(document).ready(function() {
     //Begin by creating my variables and setting up my questions and answers.
 
 
-    var triviaQuestions = [{
+    var trivaQuestion = [{
 
             prompt: "Who is the creator of the Peanuts comic strip?",
-            answerArray: ["A. Walt Disney", "B. Charles M. Schulz", "C. Jim Davis", "D. Cathy Guisewite"],
+            answerArray: ["A. Walt Disney", "B. Charles M. Schultz", "C. Jim Davis", "D. Cathy Guisewite"],
             rightAnswer: "B. Charles M. Schultz",
-            image: "https://media.giphy.com/media/KrtoScj4fDsHK/giphy.gif"
+            image: "./assets/images/CMS.gif"
 
         },
 
@@ -17,7 +17,7 @@ $(document).ready(function() {
             prompt: "What is the name of Charlie Brown's dog?",
             answerArray: ["A. Snoopy", "B. Goofy", "C. Lassie", "D. Sparky"],
             rightAnswer: "A. Snoopy",
-            image: ""
+            image: "assets/images/Snoopy.jpg"
 
         },
 
@@ -26,7 +26,7 @@ $(document).ready(function() {
             prompt: "What position did Charlie Brown play on his baseball team?",
             answerArray: ["A. Bat Boy", "B. First Base", "C. Right Field", "D. Pitcher"],
             rightAnswer: "D. Pitcher",
-            image: ""
+            image: "assets/images/pitcher.gif"
 
         },
 
@@ -34,8 +34,8 @@ $(document).ready(function() {
 
             prompt: "Who was Linus waiting for in the pumkin patch on Halloween Night?",
             answerArray: ["A. The Great Pumpkin", "B. Santa Claus", "C. Charlie Brown", "D. The WWI Flying Ace"],
-            rightAnswer: "B. Charles M. Schultz",
-            image: "https://media.giphy.com/media/5knp3kuvvvnW/giphy.gif"
+            rightAnswer: "A. The Great Pumpkin",
+            image: "assets/images/greatp.gif"
 
         },
 
@@ -44,7 +44,7 @@ $(document).ready(function() {
             prompt: "The statue of what composer is on Schroeder piano?",
             answerArray: ["A. Mozart", "B. Brahams", "C. Beethoven", "SnoopDog"],
             rightAnswer: "C. Beethoven",
-            image: ""
+            image: "assets/images/Beethoven.jpg"
 
         },
 
@@ -53,16 +53,16 @@ $(document).ready(function() {
             prompt: "Charles Shultz's uncle game him a nickname that stuck with him throught life - what was that?",
             answerArray: ["A. Spike", "B. Snoopy", "C. Sparky", "D. Chuck"],
             rightAnswer: "C. Sparky",
-            image: ""
+            image: "./assets/images/sparky.jpg"
 
         },
 
         {
 
-            prompt: "What does Lucy tell Charlie Brown she would like for Christmas?",
-            answerArray: ["A. Money", "B. Peace on Earth", "C. A dog", "D. Real Estate"],
-            rightAnswer: "D. Real Estate",
-            image: "https://media.giphy.com/media/gh4e2B446CvCw/giphy.gif"
+            prompt: "Who composed the music for all of the Peanuts television specials?",
+            answerArray: ["A. George Winston", "B. Bill Evans Trio", "C. David Benoit", "D. Vince Guaraldi"],
+            rightAnswer: "D. Vince Guaraldi",
+            image: "assets/images/vince.jpg"
 
         },
 
@@ -71,7 +71,7 @@ $(document).ready(function() {
             prompt: "How does Marcie refer to Peppermint Patty?",
             answerArray: ["A. Ma'am", "B. Ms. Peppermint", "C. P-Squared", "Sir"],
             rightAnswer: "D. Sir",
-            image: ""
+            image: "assets/images/sir.jpg"
 
         },
 
@@ -80,7 +80,7 @@ $(document).ready(function() {
             prompt: "Who is Snoopy's (The famous WWI Flying Ace) worst enemy?",
             answerArray: ["A. The Red Barron", "B. Mickey Mouse", "C. Woodstock", "D. Lucy "],
             rightAnswer: "A. The Red Barron",
-            image: ""
+            image: "assets/images/red barron.jpg"
 
         },
 
@@ -89,101 +89,166 @@ $(document).ready(function() {
             prompt: "How much does Lucy charge for psychiatric help?",
             answerArray: ["A. Free", "B. 5 Cents", "C. 10 cents", "D. 25 cents"],
             rightAnswer: "B. 5 Cents",
-            images: "https://media.giphy.com/media/BjD7keq3qEFZm/giphy.gif"
+            image: "assets/images/doctor.gif"
 
 
         },
 
     ];
 
+    var correctAnswer = 0;
 
-    var correctAnswer = 0
+    var wrongAnswer = 0;
 
-    var wrongAnswer = 0
+    var unAnswered = 0;
 
-    var unAnswered = 0
-
-    var userGuess = ""
+    var timer = 20;
 
     var intervalId;
 
-    var timer;
+    var running = false;
 
-    var index = 0
+    var qCount = trivaQuestion.length;
 
-    //develop my on-click event and trigger the timer load first question and have the start button hide.
+    var index = 0;
 
+    var newArray = [];
 
+    $("#reset").hide();
 
-    $("#start-button").on("click",
-        function() {
-            $("#start-button").hide()
-                // runTimer()
-                // game start - load questions and set up gameboard with the questions and answers.
-                // function game() 
+    //start game/ load questions and run timer
 
-            $("#questionBoard").html(triviaQuestions[index].prompt)
-            for (var i = 0; i < triviaQuestions[index].answerArray.length; i++) {
-                $("#answerBoard").append(
-                    "<span guess_value='" + triviaQuestions[index].answerArray[i] + "'>" + triviaQuestions[index].answerArray[i] + "</span>" +
-                    "<br>"
-                )
-            }
-        })
-
-
-
-
-    $("span").on("click", function() {
-        userGuess = $(this).attr("guess_value");
-
-
-        if (userGuess === rightAnswer) {
-            stop();
-            correctAnswer++;
-            // userGuess = "";
-            $("answerBoard").append("Correct!" + [triviaQuestions[index].image]);
-            hidepicture();
-
-        } else {
-            stop();
-            wrongAnswer++;
-            // userGuess = "";
-            $("#answerBoard").append("Wrong!" + [triviaQuestions[index].image]);
-            hidepicture();
-
-
-        }
+    $("#start").on("click", function() {
+        // console.log("start-button")
+        $("#start").hide();
+        displayQuestion();
+        runTimer();
 
     })
 
-    // /timer start
+    //timer action:
     function runTimer() {
+
         if (!running) {
             intervalId = setInterval(decrement, 1000);
             running = true;
         }
+
     }
-    //timer countdown
+
+    //clock countdown....
     function decrement() {
-        $("#clock").html("<h3>Time remaining: " + timer + "</h3>");
+        $("clock").append("< h3 >Time Remaining: " + timer + "< /h3>");
         timer--;
 
-        //stop timer if reach 0
         if (timer === 0) {
+
             unAnswered++;
             stop();
-            $("#answerBoard").append("Time is up! The correct answer is: " + [rightAnswer.length]);
+            $("#answerBoard").append("<p> Time is up!  The correct answer is: " + [trivaQuestion.correctAnswer] + "</p>");
             hidepicture();
+
         }
     }
 
-    //timer stop
     function stop() {
         running = false;
         clearInterval(intervalId);
 
-    };
+    }
+
+    // var name = "eran";
+    // console.log("hello")
+    // console.log(name)
+    // console.log("hello "+name+" and goodbye!")
+
+
+    function displayQuestion() {
+
+        $("#questionBoard").append("<h2>" + trivaQuestion[index].prompt + "</h2>");
+        for (var i = 0; i < trivaQuestion[index].answerArray.length; i++) {
+            var userChoice = $("<div>");
+            userChoice.addClass("answerChoice");
+            userChoice.append(trivaQuestion[index].answerArray[i]);
+            userChoice.attr("data-guessValue", i);
+            userChoice.attr("data-rightanswer", trivaQuestion[index].rightAnswer);
+            $("#answerBoard").append(userChoice);
+        }
+
+    }
+
+    //click on the line choices for answer and right or wrong notification
+
+    $(document).on('click', ".answerChoice", function() {
+        console.log($(this).attr('data-rightanswer'))
+        if ($(this).text() === $(this).attr("data-rightanswer")) {
+            console.log('correct');
+            stop();
+            correctAnswer++;
+            $("#answerBoard").html("<p> Correct!!!! </p>");
+            hidepicture();
+            index++;
+        } else {
+            console.log('wrong');
+            stop();
+            wrongAnswer++;
+            $("#answerBoard").html("<p> Sorry, The correct answer is:" + [trivaQuestion.rightAnswer] + " </p>");
+            hidepicture();
+            index++;
+        }
+    })
+
+    function hidepicture() {
+        console.log(trivaQuestion[index].image)
+        $("#answerBoard").append(`<img src="${trivaQuestion[index].image}"/>`);
+        newArray.push();
+
+        var hidpic = function() {
+            $("#answerBoard").empty();
+            $("#questionBoard").empty();
+
+            timer = 2000;
+
+            if ((wrongAnswer + correctAnswer + unAnswered) === qCount) {
+
+                // $("#questionBoard").empty();
+                $("#questionBoard").html("<h3>Game Over! This is how well you know The Peanuts Gang:</h3>");
+                $("#answerBoard").append("<h4>Correct: " + correctAnswer + "</h4>");
+                $("#answerBoard").append("<h4>Incorrect: " + wrongAnswer + "</h4>");
+                $("#answerBoard").append("<h4>Unanswered: " + unAnswered + "</h4>");
+                $("#reset").show();
+                correctAnswer = 0;
+                wrongAnswer = 0;
+                unAnsered = 0;
+
+            } else {
+                runTimer();
+                displayQuestion();
+            }
+
+
+        }
+
+        setTimeout(hidpic, 3 * 1000)
+            // hidpic();
+
+    }
+
+    $("#reset").on("click", function() {
+        $("#reset").hide();
+        $("#answerBoard").empty();
+        $("#questionBoard").empty();
+        for (var i = 0; i < trivaQuestion.length; i++) {
+            trivaQuestion.push(trivaQuestion[i]);
+
+        }
+        runTimer()
+        displayQuestion();
+
+    })
+
+
+
 
 
 
