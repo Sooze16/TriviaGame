@@ -32,7 +32,7 @@ $(document).ready(function() {
 
         {
 
-            prompt: "Who was Linus waiting for in the pumkin patch on Halloween Night?",
+            prompt: "Who was Linus waiting for in the pumpkin patch on Halloween Night?",
             answerArray: ["A. The Great Pumpkin", "B. Santa Claus", "C. Charlie Brown", "D. The WWI Flying Ace"],
             rightAnswer: "A. The Great Pumpkin",
             image: "assets/images/greatp.gif"
@@ -41,7 +41,7 @@ $(document).ready(function() {
 
         {
 
-            prompt: "The statue of what composer is on Schroeder piano?",
+            prompt: "Who is Schroeder's favorite music composer?",
             answerArray: ["A. Mozart", "B. Brahams", "C. Beethoven", "SnoopDog"],
             rightAnswer: "C. Beethoven",
             image: "assets/images/Beethoven.jpg"
@@ -102,7 +102,7 @@ $(document).ready(function() {
 
     var unAnswered = 0;
 
-    var timer = 20;
+    var timer = 5;
 
     var intervalId;
 
@@ -119,7 +119,7 @@ $(document).ready(function() {
     //start game/ load questions and run timer
 
     $("#start").on("click", function() {
-        // console.log("start-button")
+        console.log("start-button")
         $("#start").hide();
         displayQuestion();
         runTimer();
@@ -132,13 +132,14 @@ $(document).ready(function() {
         if (!running) {
             intervalId = setInterval(decrement, 1000);
             running = true;
+
         }
 
     }
 
     //clock countdown....
     function decrement() {
-        $("clock").append("< h3 >Time Remaining: " + timer + "< /h3>");
+        $("#clock").html("<h3>Time Remaining: " + timer + "</h3>");
         timer--;
 
         if (timer === 0) {
@@ -147,20 +148,19 @@ $(document).ready(function() {
             stop();
             $("#answerBoard").append("<p> Time is up!  The correct answer is: " + [trivaQuestion.correctAnswer] + "</p>");
             hidepicture();
+            index++;
 
         }
+
+
     }
 
     function stop() {
         running = false;
+        timer = 5;
         clearInterval(intervalId);
 
     }
-
-    // var name = "eran";
-    // console.log("hello")
-    // console.log(name)
-    // console.log("hello "+name+" and goodbye!")
 
 
     function displayQuestion() {
@@ -207,7 +207,6 @@ $(document).ready(function() {
             $("#answerBoard").empty();
             $("#questionBoard").empty();
 
-            timer = 2000;
 
             if ((wrongAnswer + correctAnswer + unAnswered) === qCount) {
 
@@ -238,10 +237,11 @@ $(document).ready(function() {
         $("#reset").hide();
         $("#answerBoard").empty();
         $("#questionBoard").empty();
-        for (var i = 0; i < trivaQuestion.length; i++) {
-            trivaQuestion.push(trivaQuestion[i]);
+        // for (var i = 0; i < trivaQuestion.length; i++) {
+        //     trivaQuestion.push(trivaQuestion[i]);
 
-        }
+        // }
+        index = 0;
         runTimer()
         displayQuestion();
 
