@@ -42,7 +42,7 @@ $(document).ready(function() {
         {
 
             prompt: "Who is Schroeder's favorite music composer?",
-            answerArray: ["A. Mozart", "B. Brahams", "C. Beethoven", "SnoopDog"],
+            answerArray: ["A. Mozart", "B. Brahams", "C. Beethoven", "D. SnoopDog"],
             rightAnswer: "C. Beethoven",
             image: "assets/images/Beethoven.jpg"
 
@@ -69,7 +69,7 @@ $(document).ready(function() {
         {
 
             prompt: "How does Marcie refer to Peppermint Patty?",
-            answerArray: ["A. Ma'am", "B. Ms. Peppermint", "C. P-Squared", "Sir"],
+            answerArray: ["A. Ma'am", "B. Ms. Peppermint", "C. P-Squared", "D. Sir"],
             rightAnswer: "D. Sir",
             image: "assets/images/sir.jpg"
 
@@ -102,7 +102,7 @@ $(document).ready(function() {
 
     var unAnswered = 0;
 
-    var timer = 5;
+    var timer = 15;
 
     var intervalId;
 
@@ -157,7 +157,7 @@ $(document).ready(function() {
 
     function stop() {
         running = false;
-        timer = 5;
+        timer = 15;
         clearInterval(intervalId);
 
     }

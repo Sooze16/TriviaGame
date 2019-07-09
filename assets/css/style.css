@@ -44,3 +44,10 @@
         font-size: 25px;
         text-align: center;
     }
+    
+    #reset {
+        text-align: center;
+        border: 2px solid black;
+        margin-top: 175px;
+        margin-left: 600px;
+    }
